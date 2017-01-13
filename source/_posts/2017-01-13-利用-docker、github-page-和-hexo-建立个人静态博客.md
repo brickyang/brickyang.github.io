@@ -1,6 +1,6 @@
 ---
 layout: "post"
-title: "利用 Docker、GitHub Page 和 Hexo 建立个人静态博客"
+title: "利用 Docker、GitHub Pages 和 Hexo 建立个人静态博客"
 date: "2017-01-13 22:21"
 toc: true
 tags:
@@ -11,7 +11,7 @@ tags:
 
 ## 前言
 
-GitHub Page + Hexo 是目前主流的静态博客之一。Hexo 博客使用 Markdown 语法写作，托管在 GitHub，不需要折腾后台和数据库。除了开始时需要一点安装和配置操作，以后的使用非常简单。
+GitHub Pages + Hexo 是目前主流的静态博客之一。Hexo 博客使用 Markdown 语法写作，托管在 GitHub，不需要折腾后台和数据库。除了开始时需要一点安装和配置操作，以后的使用非常简单。
 
 Docker 是目前越来越流行的容器工具。你可以把它简单地理解成一个虚拟机。使用 Docker 有很多好处，这里将要展示的，就是如何利用 Docker 打造一个可以快速移植的开发环境。
 
