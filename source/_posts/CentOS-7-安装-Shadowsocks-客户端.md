@@ -1,6 +1,7 @@
 ---
 title: CentOS 7 安装 shadowsocks 客户端
 toc: true
+description: 使用国内服务器，无论用 npm 还是 GitHub 都不太顺畅。Npm 可以用 cnpm 代替，GitHub 就没办法了。用了 shadowsocks，这个问题就完美解决了。
 tags:
   - CentOS
   - Shadowsocks
@@ -14,8 +15,6 @@ tags:
 **本文的过程我已在本地 CentOS 上成功运行，尚未在阿里云实测。**
 
 **给新手：**这里介绍的是安装 shadowsocks **客户端**的过程，也就是让服务器能正常访问 GitHub 的方法。你需要已经有一个 shadowsocks 服务端。
-
-<!--more-->
 
 一般网上找到的「CentOS 安装 shadowsocks」文章多数都是讲安装服务端的。
 
