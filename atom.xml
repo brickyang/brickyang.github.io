@@ -63,10 +63,10 @@
   
   <entry>
     <title>CentOS 7 安装 shadowsocks 客户端</title>
-    <link href="http://brickyang.github.io/2017/03/02/CentOS-7-%E5%AE%89%E8%A3%85-Shadowsocks-%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
-    <id>http://brickyang.github.io/2017/03/02/CentOS-7-安装-Shadowsocks-客户端/</id>
-    <published>2017-03-02T06:13:05.000Z</published>
-    <updated>2017-03-02T10:54:21.000Z</updated>
+    <link href="http://brickyang.github.io/2017/01/14/CentOS-7-%E5%AE%89%E8%A3%85-Shadowsocks-%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+    <id>http://brickyang.github.io/2017/01/14/CentOS-7-安装-Shadowsocks-客户端/</id>
+    <published>2017-01-14T10:01:52.000Z</published>
+    <updated>2017-03-02T10:55:57.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近由于在阿里云从 GitHub 拖代码非常困难，因此萌生了在服务器上使用 shadowsocks 的念头。</p>
 <p>本文记录了我在 CentOS 7 上成功安装运行 shadowsocks 客户端的过程。</p>
