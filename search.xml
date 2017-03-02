@@ -6,7 +6,7 @@
     <entry>
       <title><![CDATA[Linux 自动定时备份 MongoDB]]></title>
       <url>http://brickyang.github.io/2017/03/02/Linux-%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD-MongoDB/</url>
-      <content type="html"><![CDATA[<h1 id="Linux-自动定时备份-MongoDB"><a href="#Linux-自动定时备份-MongoDB" class="headerlink" title="Linux 自动定时备份 MongoDB"></a>Linux 自动定时备份 MongoDB</h1><p>本文介绍在 Linux 系统下，使用 <code>mongodump</code> 命令自动定时备份数据库的方法。</p>
+      <content type="html"><![CDATA[<p>本文介绍在 Linux 系统下，使用 <code>mongodump</code> 命令自动定时备份数据库的方法。</p>
 <h2 id="mongodump"><a href="#mongodump" class="headerlink" title="mongodump"></a>mongodump</h2><p><code>mongodump</code> 是 MongoDB 提供的一个工具，用于备份数据库，配合使用 <code>mongorestore</code> 恢复工具使用。这套工具适合小型应用或开发环境。</p>
 <p>运行 <code>mongodump</code> 和 <code>mongorestore</code> 时需要读取正在运行的数据库实例，因此会影响数据库性能。一方面是运行时需要占用系统资源，另一方面，运行这两个命令时数据库会强制通过内存读取所有数据，可能导致读取的不常用数据覆盖常用数据，从而影响数据库日常运行的性能。</p>
 <p><em>2.2及以上版本的 <code>mongodump</code> 数据格式与低版本<strong>不兼容</strong>，因此请勿使用高版本工具备份低版本数据。</em></p>
