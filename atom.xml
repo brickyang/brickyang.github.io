@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://brickyang.github.io/"/>
-  <updated>2017-03-02T10:51:18.000Z</updated>
+  <updated>2017-03-02T10:53:04.000Z</updated>
   <id>http://brickyang.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://brickyang.github.io/2017/03/02/Linux-%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD-MongoDB/"/>
     <id>http://brickyang.github.io/2017/03/02/Linux-自动备份-MongoDB/</id>
     <published>2017-03-02T10:01:52.000Z</published>
-    <updated>2017-03-02T10:51:18.000Z</updated>
+    <updated>2017-03-02T10:53:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文介绍在 Linux 系统下，使用 <code>mongodump</code> 命令自动定时备份数据库的方法。</p>
 <h2 id="mongodump"><a href="#mongodump" class="headerlink" title="mongodump"></a>mongodump</h2><p><code>mongodump</code> 是 MongoDB 提供的一个工具，用于备份数据库，配合使用 <code>mongorestore</code> 恢复工具使用。这套工具适合小型应用或开发环境。</p>
@@ -52,11 +52,12 @@
     
     <summary type="html">
     
-      &lt;p&gt;本文介绍在 Linux 系统下，使用 &lt;code&gt;mongodump&lt;/code&gt; 命令自动定时备份数据库的方法。&lt;/p&gt;
-&lt;h2 id=&quot;mongodump&quot;&gt;&lt;a href=&quot;#mongodump&quot; class=&quot;headerlink&quot; title=&quot;mongodump
+      本文介绍在 Linux 系统下，使用 mongodump 命令自动定时备份数据库的方法。
     
     </summary>
     
+    
+      <category term="MongoDB" scheme="http://brickyang.github.io/tags/MongoDB/"/>
     
   </entry>
   
