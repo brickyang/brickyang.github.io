@@ -1,6 +1,7 @@
 ---
 title: CentOS 7 安装 shadowsocks 客户端
 toc: true
+date: 2017-01-14 18:01:52
 description: 使用国内服务器，无论用 npm 还是 GitHub 都不太顺畅。Npm 可以用 cnpm 代替，GitHub 就没办法了。用了 shadowsocks，这个问题就完美解决了。
 tags:
   - CentOS
@@ -25,16 +26,16 @@ Pip 是 Python 的包管理工具，这里我们用 pip 安装 shadowsocks。
 有些文章会介绍用 `yum install -y pip` 安装，我用的是官方一个最小化的 CentOS，没有这个包，所以手动安装。
 
 ```
-$ curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
-$ python get-pip.py
+curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+python get-pip.py
 ```
 
 ## Shadowsocks 客户端
 
 ### 安装
 ```
-$ pip install --upgrade pip
-$ pip install shadowsocks
+pip install --upgrade pip
+pip install shadowsocks
 ```
 
 ### 配置
@@ -42,7 +43,7 @@ $ pip install shadowsocks
 新建配置文件：
 
 ```
-$ vi /etc/shadowsocks.json
+vi /etc/shadowsocks.json
 ```
 
 填写以下内容
@@ -63,8 +64,8 @@ $ vi /etc/shadowsocks.json
 ### 启动
 
 ```
-$ nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
-$ echo " nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local   #设置自启动
+nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
+echo " nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &" /etc/rc.local   #设置自启动
 ```
 
 ### 测试
@@ -84,9 +85,9 @@ Shadowsocks 是一个 socket5 服务，我们需要使用 Privoxy 把流量转�
 ###下载安装文件
 
 ```
-$ wget http://www.privoxy.org/sf-download-mirror/Sources/3.0.26%20%28stable%29/privoxy-3.0.26-stable-src.tar.gz
-$ tar -zxvf privoxy-3.0.26-stable-src.tar.gz
-$ cd privoxy-3.0.26-stable
+wget http://www.privoxy.org/sf-download-mirror/Sources/3.0.26%20%28stable%29/privoxy-3.0.26-stable-src.tar.gz
+tar -zxvf privoxy-3.0.26-stable-src.tar.gz
+cd privoxy-3.0.26-stable
 ```
 
 privoxy-3.0.26-stable 是目前最新的稳定版，建议在下载前去 [Privoxy 官网下载页](https://www.privoxy.org/sf-download-mirror/Sources/) 检查一下版本。
@@ -97,15 +98,15 @@ Privoxy 强烈不建议使用 root 用户运行，所以我们使用 `useradd pr
 
 ### 安装
 ```
-$ autoheader && autoconf
-$ ./configure
-$ make && make install
+autoheader && autoconf
+./configure
+make && make install
 ```
 
 ### 配置
 
 ```
-$ vi /usr/local/etc/privoxy/config
+vi /usr/local/etc/privoxy/config
 ```
 
 找到以下两句，确保没有注释掉
@@ -118,7 +119,7 @@ forward-socks5t / 127.0.0.1:0 # 这里的端口写 shadowsocks 的本地端口
 ### 启动
 
 ```
-$ privoxy --user privoxy /usr/local/etc/privoxy/config
+privoxy --user privoxy /usr/local/etc/privoxy/config
 ```
 
 ## 配置 /etc/profile
@@ -126,7 +127,7 @@ $ privoxy --user privoxy /usr/local/etc/privoxy/config
 编辑：
 
 ```
-$ vi /etc/profile
+vi /etc/profile
 ```
 
 添加下面两句：
@@ -139,13 +140,13 @@ export https_proxy=http://127.0.0.1:8118
 运行以下：
 
 ```
-$ source /etc/profile
+source /etc/profile
 ```
 
 测试生效：
 
 ```
-$ curl www.google.com
+curl www.google.com
 ```
 
 返回一大堆 HTML 则说明 shadowsocks 正常工作了。
@@ -154,8 +155,8 @@ $ curl www.google.com
 如果不能访问，请重启机器，依次打开 shadowsocks 和 privoxy 再测试.
 
 ```
-$ nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
-$ privoxy --user privoxy /usr/local/etc/privoxy/config
+nohup sslocal -c /etc/shadowsocks.json /dev/null 2>&1 &
+privoxy --user privoxy /usr/local/etc/privoxy/config
 ```
 
 如果不需要用代理了，记得把 `/etc/profile` 里的配置注释掉，不然会一直走代理流量。
