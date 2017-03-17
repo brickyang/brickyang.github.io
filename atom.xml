@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://brickyang.github.io/"/>
-  <updated>2017-03-17T09:33:46.000Z</updated>
+  <updated>2017-03-17T09:37:05.000Z</updated>
   <id>http://brickyang.github.io/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>如何用源生的 React， Webpack，ES6 来使用 AantDdesign 组件库？</title>
+    <title>如何用源生的 React， Webpack，ES6 来使用 Aant Ddesign 组件库？</title>
     <link href="http://brickyang.github.io/2017/03/17/%E5%A6%82%E4%BD%95%E7%94%A8%E6%BA%90%E7%94%9F%E7%9A%84-React%EF%BC%8C-Webpack%EF%BC%8CES6-%E6%9D%A5%E4%BD%BF%E7%94%A8-AantDdesign-%E7%BB%84%E4%BB%B6%E5%BA%93%EF%BC%9F/"/>
     <id>http://brickyang.github.io/2017/03/17/如何用源生的-React，-Webpack，ES6-来使用-AantDdesign-组件库？/</id>
     <published>2017-03-17T09:28:40.000Z</published>
-    <updated>2017-03-17T09:33:46.000Z</updated>
+    <updated>2017-03-17T09:37:05.000Z</updated>
     
     <content type="html"><![CDATA[<p>本文是在知乎同名问题下的回答，在这里也记录一下。</p>
 <p><strong>Link：</strong> <a href="https://www.zhihu.com/question/45088537/answer/152124079" target="_blank" rel="external">知乎原回答</a>，<a href="https://github.com/brickyang/antd-demo" target="_blank" rel="external">GitHub demo</a></p>
@@ -59,7 +59,7 @@
     
     <summary type="html">
     
-      想上手蚂蚁金服的组件库，却发现官方教程里都是用自己的一套构建方式，很想了解如何去以常规的 Webpack 上手写页面，以及如何理解组件库的内部机制?
+      想上手蚂蚁金服的 Ant Design 组件库，却发现官方教程里都是用自己的一套构建方式，很想了解如何去以常规的 Webpack 上手写页面，以及如何理解组件库的内部机制?
     
     </summary>
     
