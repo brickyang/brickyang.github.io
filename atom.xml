@@ -79,7 +79,7 @@
     <link href="http://brickyang.github.io/2017/03/16/Docker%20%E4%B8%AD%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%20container%20%E7%9A%84%E6%97%B6%E5%8C%BA/"/>
     <id>http://brickyang.github.io/2017/03/16/Docker 中如何设置 container 的时区/</id>
     <published>2017-03-16T04:52:18.000Z</published>
-    <updated>2017-03-16T05:08:24.000Z</updated>
+    <updated>2017-03-17T09:41:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在使用 Docker 时发现 container 中的时区是 UTC。这是因为我的基础镜像是官方的 <code>node:7.6</code> 。Docker Store 上的官方镜像基本上都默认是 UTC 时区，需要我们手动设置一下。</p>
 <h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><p>如果你使用 Dockerfile 制作自己的镜像，那么只需要在 Dockerfile 中加入下面两句就可以了：</p>
@@ -110,9 +110,9 @@
     </summary>
     
     
-      <category term="DOcker" scheme="http://brickyang.github.io/tags/DOcker/"/>
-    
       <category term="Linux" scheme="http://brickyang.github.io/tags/Linux/"/>
+    
+      <category term="Docker" scheme="http://brickyang.github.io/tags/Docker/"/>
     
   </entry>
   
