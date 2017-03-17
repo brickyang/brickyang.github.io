@@ -3,7 +3,7 @@ title: Docker 中如何设置 container 的时区
 date: 2017-03-16 12:52:18
 description: 使用官方镜像时，默认时区往往是 UTC，和国内有8个小时时差，所以需要我们手动修改时区。
 tags:
-  - DOcker
+  - Docker
   - Linux
 ---
 
