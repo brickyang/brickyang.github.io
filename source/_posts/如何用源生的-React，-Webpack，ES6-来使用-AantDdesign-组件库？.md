@@ -1,5 +1,5 @@
 ---
-title: 如何用源生的 React， Webpack，ES6 来使用 Aant Ddesign 组件库？
+title: 如何用源生的 React， Webpack，ES6 来使用 Ant Design 组件库？
 date: 2017-03-17 17:28:40
 description: 想上手蚂蚁金服的 Ant Design 组件库，却发现官方教程里都是用自己的一套构建方式，很想了解如何去以常规的 Webpack 上手写页面，以及如何理解组件库的内部机制?
 tags:
