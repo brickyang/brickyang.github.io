@@ -110,9 +110,9 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://brickyang.github.io/tags/Linux/"/>
-    
       <category term="Docker" scheme="http://brickyang.github.io/tags/Docker/"/>
+    
+      <category term="Linux" scheme="http://brickyang.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -121,7 +121,7 @@
     <link href="http://brickyang.github.io/2017/03/15/%E5%88%A9%E7%94%A8-Docker-%E8%BF%90%E8%A1%8C-MongoDB/"/>
     <id>http://brickyang.github.io/2017/03/15/利用-Docker-运行-MongoDB/</id>
     <published>2017-03-15T06:10:17.000Z</published>
-    <updated>2017-03-15T10:01:13.000Z</updated>
+    <updated>2017-04-07T07:45:21.000Z</updated>
     
     <content type="html"><![CDATA[<p>在服务器上通过 Docker 运行 MongoDB，可以省略本地安装数据库的步骤，并且日常的运维和使用与本地安装基本没有区别。</p>
 <h2 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h2><p>我们将使用官方的 <code>mongo:3.4</code> 镜像（image），并将 <code>27017</code> 端口映射到主机端口，同时利用 Docker Volume 将数据库文件保存在主机上而非容器（container）中。</p>
@@ -139,7 +139,7 @@
 <h2 id="新建管理员"><a href="#新建管理员" class="headerlink" title="新建管理员"></a>新建管理员</h2><p>现在我们需要进入 mongo shell 操作：</p>
 <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">docker exec -it &lt;YOUR-NAME&gt; mongo admin</div><div class="line">&gt; db.createUser(&#123; <span class="string">user:</span> <span class="string">'&lt;USER&gt;'</span>, <span class="string">pwd:</span> <span class="string">'&lt;PASSWORD&gt;'</span>, <span class="string">roles:</span> [ &#123; <span class="string">role:</span> <span class="string">'userAdminAnyDatabase'</span>, <span class="string">db:</span> <span class="string">'admin'</span> &#125; ]&#125;);</div><div class="line">Successfully added <span class="string">user:</span> &#123;</div><div class="line">    <span class="string">"user"</span> : <span class="string">"&lt;USER&gt;"</span>,</div><div class="line">    <span class="string">"roles"</span> : [</div><div class="line">        &#123;</div><div class="line">            <span class="string">"role"</span> : <span class="string">"userAdminAnyDatabase"</span>,</div><div class="line">            <span class="string">"db"</span> : <span class="string">"admin"</span></div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以后想以管理员身份登入 mongo shell 就可以运行：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exect -it <span class="tag">&lt;<span class="name">YOUR-NAME</span>&gt;</span> mongo -u <span class="tag">&lt;<span class="name">USER</span>&gt;</span> -p <span class="tag">&lt;<span class="name">PASSWORD</span>&gt;</span> --authenticationDatabase admin</div></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker exec -it <span class="tag">&lt;<span class="name">YOUR-NAME</span>&gt;</span> mongo -u <span class="tag">&lt;<span class="name">USER</span>&gt;</span> -p <span class="tag">&lt;<span class="name">PASSWORD</span>&gt;</span> --authenticationDatabase admin</div></pre></td></tr></table></figure>
 <h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>现在我们就可以像本地安装的 mong 一样操作了。如果误删了数据库管理员，可以停掉正在运行的库，然后去掉 <code>—auth</code> 重新运行一个新库，登录进去新建用户即可。</p>
 ]]></content>
     
