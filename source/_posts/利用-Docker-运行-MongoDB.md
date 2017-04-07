@@ -60,7 +60,7 @@ Successfully added user: {
 以后想以管理员身份登入 mongo shell 就可以运行：
 
 ```
-docker exect -it <YOUR-NAME> mongo -u <USER> -p <PASSWORD> --authenticationDatabase admin
+docker exec -it <YOUR-NAME> mongo -u <USER> -p <PASSWORD> --authenticationDatabase admin
 ```
 
 ## 后记
