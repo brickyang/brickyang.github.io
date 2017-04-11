@@ -88,6 +88,10 @@ chkconfig crond on    // 设为开机启动
 
 至此，一个自动运行的备份脚本就设置好了。以后每天凌晨02:00都会有一份新鲜的备份文件放在指定目录中，并且会自动删除14天前的旧备份。
 
+## 恢复备份
+
+[使用 mongorestore 恢复 MongoDB 备份](https://brickyang.github.io/2017/04/11/%E4%BD%BF%E7%94%A8-mongorestore-%E6%81%A2%E5%A4%8D-MongoDB-%E5%A4%87%E4%BB%BD/)
+
 **参考资料**
 
 [Back Up and Restore with MongoDB Tools](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/)
