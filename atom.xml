@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://brickyang.github.io/"/>
-  <updated>2017-04-11T10:47:11.000Z</updated>
+  <updated>2017-04-11T10:48:57.000Z</updated>
   <id>http://brickyang.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://brickyang.github.io/2017/04/11/%E4%BD%BF%E7%94%A8-mongorestore-%E6%81%A2%E5%A4%8D-MongoDB-%E5%A4%87%E4%BB%BD/"/>
     <id>http://brickyang.github.io/2017/04/11/使用-mongorestore-恢复-MongoDB-备份/</id>
     <published>2017-04-11T10:37:03.000Z</published>
-    <updated>2017-04-11T10:47:11.000Z</updated>
+    <updated>2017-04-11T10:48:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>上一篇<a href="https://brickyang.github.io/2017/03/02/Linux-%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD-MongoDB/">《Linux 自动定时备份 MongoDB》</a>文章中说了如何使用 <code>mongodump</code> 命令备份 MongoDB 数据库。这里说明一下如何使用 <code>mongorestore</code> 命令恢复备份。</p>
 <p><code>mongodump</code> 和 <code>mongorestore</code> 是一对命令，分别用于备份和恢复数据。</p>
@@ -38,7 +38,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;上一篇&lt;a href=&quot;https://brickyang.github.io/2017/03/02/Linux-%E8%87%AA%E5%8A%A8%E5%A4%87%E4%BB%BD-MongoDB/&quot;&gt;《Linux 自动定时备份 MongoDB》&lt;/a&gt;文章中说了如何
+      本文介绍使用 mongorestore 命令恢复 MongoDB 数据库备份文件。
     
     </summary>
     
