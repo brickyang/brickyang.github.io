@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://brickyang.github.io/"/>
-  <updated>2017-04-11T10:48:57.000Z</updated>
+  <updated>2017-04-12T08:08:42.000Z</updated>
   <id>http://brickyang.github.io/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在 CentOS 7 上安装 Docker</title>
+    <link href="http://brickyang.github.io/2017/04/12/%E5%9C%A8-CentOS-7-%E4%B8%8A%E5%AE%89%E8%A3%85-Docker-CE/"/>
+    <id>http://brickyang.github.io/2017/04/12/在-CentOS-7-上安装-Docker-CE/</id>
+    <published>2017-04-12T07:48:19.000Z</published>
+    <updated>2017-04-12T08:08:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文记录在 CentOS 7 服务器上安装 Docker CE 的过程。Docker CE 是社区版，即免费版。Docker EE 是企业版，即收费版。</p>
+<p><strong>Docker CE 和 EE 版的安装过程不尽相同，本过程仅适用于 CE 版。</strong></p>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p>需要 CentOS 7 64-bit。</p>
+<h2 id="卸载旧版本"><a href="#卸载旧版本" class="headerlink" title="卸载旧版本"></a>卸载旧版本</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">sudo</span> yum remove docker docker-<span class="meta">common</span> container-<span class="keyword">selinux </span>docker-<span class="keyword">selinux </span>docker-engine</div></pre></td></tr></table></figure>
+<h2 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h2><p>有两种方法安装 Docker，这里使用最常用的仓库安装方法。</p>
+<h3 id="建立仓库"><a href="#建立仓库" class="headerlink" title="建立仓库"></a>建立仓库</h3><ol>
+<li>安装 <code>yum-utils</code></li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum <span class="keyword">install</span> -y yum-utils</div></pre></td></tr></table></figure>
+<ol>
+<li>建立仓库</li>
+</ol>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum-config-manager --<span class="built_in">add</span>-repo http<span class="variable">s:</span>//download.docker.<span class="keyword">com</span>/linux/centos/docker-<span class="keyword">ce</span>.repo</div></pre></td></tr></table></figure>
+<h3 id="安装和使用"><a href="#安装和使用" class="headerlink" title="安装和使用"></a>安装和使用</h3><ol>
+<li>更新 <code>yum</code> 包索引</li>
+</ol>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">sudo yum makecache fast</span></div></pre></td></tr></table></figure>
+<ol>
+<li>安装最新版 Docker（<strong>如需安装指定版本请跳过此步</strong>）</li>
+</ol>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum <span class="keyword">install</span> docker-ce</div></pre></td></tr></table></figure>
+<ol>
+<li>安装指定版本 Docker</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo yum <span class="keyword">install</span> docker-ce-&lt;<span class="keyword">VERSION</span>&gt;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>建议在生产服务器上总是安装指定版本 Docker。先使用 <code>yum list</code> 命令列出所有版本。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&gt; yum <span class="keyword">list</span> docker-ce.x86_64  --showduplicates |<span class="keyword">sort</span> -<span class="built_in">r</span></div><div class="line">&gt;</div></pre></td></tr></table></figure>
+</blockquote>
+<p>&gt;</p>
+<blockquote>
+<p>这个命令安版本号排序列出 Docker CE 的二进制包。</p>
+</blockquote>
+<ol>
+<li>启动 Docker</li>
+</ol>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl <span class="literal">start</span> docker</div></pre></td></tr></table></figure>
+<h3 id="升级-Docker"><a href="#升级-Docker" class="headerlink" title="升级 Docker"></a>升级 Docker</h3><p>如果希望升级 Docker，首先运行 <code>sudo yum makecache fast</code>，然后按照以上步骤重新选择新版本安装。</p>
+<p><strong>参考资料</strong></p>
+<p><a href="https://docs.docker.com/engine/installation/linux/centos/#install-docker" target="_blank" rel="external">Get Docker for CentOS</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      记录在 CentOS 7 服务器上安装 Docker CE 的过程。
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="http://brickyang.github.io/tags/Docker/"/>
+    
+      <category term="ContOS" scheme="http://brickyang.github.io/tags/ContOS/"/>
+    
+  </entry>
   
   <entry>
     <title>使用 mongorestore 恢复 MongoDB 备份</title>
