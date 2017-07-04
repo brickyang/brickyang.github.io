@@ -4,6 +4,51 @@
   
     
     <entry>
+      <title><![CDATA[Egg-mongo，基于 MongoDB Native Driver]]></title>
+      <url>http://brickyang.github.io/2017/07/04/Egg-mongo%EF%BC%8C%E5%9F%BA%E4%BA%8E-MongoDB-Native-Driver/</url>
+      <content type="html"><![CDATA[<p>MongoDB 官方为 Node.js 提供了 MongoDB Native Driver。这也是我一直喜欢使用的 MongoDB 库。直接使用官方 API 简单明了，而且也易于学习。</p>
+<p>Egg.js 官方提供的 MongoDB 插件基于 Mongoose，所以就自己动手做了这个插件。插件的 API 都是我在实际项目中长期使用的。</p>
+<p><strong>GitHub：</strong><a href="https://github.com/brickyang/egg-mongo" target="_blank" rel="external">https://github.com/brickyang/egg-mongo</a></p>
+<p>本插件基于 <a href="https://github.com/mongodb/node-mongodb-native" target="_blank" rel="external">node-mongodb-native</a>，提供了 MongoDB 官方 driver 及 API。</p>
+<p>插件对一些常用 API 进行了简单封装以简化使用，同时保留了所有原版属性。例如，使用原版 API 进行一次查找需要写</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">db.collection(<span class="string">'name'</span>)</div><div class="line"> .find(query)</div><div class="line"> .skip(skip)</div><div class="line"> .limit(limit)</div><div class="line"> .project(project)</div><div class="line"> .sort(sort)</div><div class="line"> .toArray();</div></pre></td></tr></table></figure>
+<p>封装后</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.mongo.find(<span class="string">'name'</span>, &#123; query, skip, limit, project, sort &#125;);</div></pre></td></tr></table></figure>
+<p>此插件完全支持 Promise，并强烈推荐使用 async/await。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm i egg-mongo-native --save</div></pre></td></tr></table></figure>
+<h2 id="开启插件"><a href="#开启插件" class="headerlink" title="开启插件"></a>开启插件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// config/plugin.js</span></div><div class="line">exports.mongo = &#123;</div><div class="line">  <span class="attr">enable</span>: <span class="literal">true</span>,</div><div class="line">  <span class="attr">package</span>: <span class="string">'egg-mongo'</span>,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &#123;app_root&#125;/config/config.default.js</span></div><div class="line">exports.mongo = &#123;</div><div class="line">  <span class="attr">client</span>: &#123;</div><div class="line">    <span class="attr">host</span>: <span class="string">'localhost'</span>,</div><div class="line">    <span class="attr">port</span>: <span class="number">27017</span>,</div><div class="line">    <span class="attr">name</span>: <span class="string">'test'</span>,</div><div class="line">  &#125;,</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>请到 <a href="config/config.default.js">config/config.default.js</a> 查看详细配置项说明。</p>
+<h2 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h2><p>本插件提供的 API 只是对原版 API 进行了必要的简化，所有属性名称与原版 API 一致。所有针对文档操作的 API，通常接受 2 个参数，第一个参数是 collection 名称，第二个参数是一个对象，属性名即为原版 API 的所有参数。例如，使用原版 API 进行一次插入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">db.collection(<span class="string">'name'</span>).insertOne(doc, options);</div></pre></td></tr></table></figure>
+<p>使用插件 API</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> args = &#123; doc, options &#125;;</div><div class="line">app.mongo.insertOne(<span class="string">'name'</span>, args);</div></pre></td></tr></table></figure>
+<p>可以看到 <code>args</code> 就是包含原版 API 参数的一个对象。</p>
+<p>目前插件提供的 API 包括：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">connect()      <span class="comment">// 不需要用户调用</span></div><div class="line">insertOne()</div><div class="line">findOneAndUpdate()</div><div class="line">findOneAndReplace()</div><div class="line">findOneAndDelete()</div><div class="line">insertMany()</div><div class="line">updateMany()</div><div class="line">deleteMany()</div><div class="line">find()</div><div class="line">count()</div><div class="line">distinct()</div><div class="line">createIndex()</div><div class="line">listCollection()</div><div class="line">createCollection()</div></pre></td></tr></table></figure>
+<p>当然，在任何时候你也都可以使用 <code>app.mongo.db</code> 调用所有 API。你可以在这里查看所有 API：<a href="http://mongodb.github.io/node-mongodb-native/2.2/api/" target="_blank" rel="external">Node.js MongoDB Driver API</a>。</p>
+<h2 id="同步与异步"><a href="#同步与异步" class="headerlink" title="同步与异步"></a>同步与异步</h2><p><code>node-mongodb-native</code> 所有 API 都支持 Promise，因此你可以自由地以异步或同步方式使用本插件。</p>
+<h3 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Promise</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params">doc</span>) </span>&#123;</div><div class="line">  app.mongo.insertOne(<span class="string">'name'</span>, &#123; doc &#125;)</div><div class="line">  .then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result))</div><div class="line">  .catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.error(error));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="同步"><a href="#同步" class="headerlink" title="同步"></a>同步</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用 async/await</span></div><div class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">create</span>(<span class="params">doc</span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> app.mongo.insertOne(<span class="string">'name'</span>, &#123; doc &#125;);</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</div><div class="line">    <span class="built_in">console</span>.error(error);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 使用 Generator</span></div><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">create</span>(<span class="params">doc</span>) </span>&#123;</div><div class="line">  <span class="keyword">try</span> &#123;</div><div class="line">    <span class="keyword">const</span> result = <span class="keyword">yield</span> app.mongo.insertOne(<span class="string">'name'</span>, &#123; doc &#125;);</div><div class="line">    <span class="built_in">console</span>.log(result);</div><div class="line">  &#125; <span class="keyword">catch</span> (errpr) &#123;</div><div class="line">    <span class="built_in">console</span>.error(error);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你使用 <code>app.mongo.db</code> 调用原版 API，则也可以使用回调函数。插件封装的 API 不支持回调函数，因为 Promise 和 async/await 更加优雅。</p>
+<p>Node.js 7.6 开始已经原生支持 async/await，不再需要 Babel。</p>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p><a href="https://github.com/brickyang/egg-mongo/blob/master/LICENSE" target="_blank" rel="external">MIT</a></p>
+]]></content>
+      
+        
+        <tags>
+            
+            <tag> MongoDB </tag>
+            
+            <tag> Egg.js </tag>
+            
+            <tag> Egg Plugin </tag>
+            
+        </tags>
+        
+    </entry>
+    
+    <entry>
       <title><![CDATA[在 CentOS 7 上安装 Docker]]></title>
       <url>http://brickyang.github.io/2017/04/12/%E5%9C%A8-CentOS-7-%E4%B8%8A%E5%AE%89%E8%A3%85-Docker-CE/</url>
       <content type="html"><![CDATA[<p>本文记录在 CentOS 7 服务器上安装 Docker CE 的过程。Docker CE 是社区版，即免费版。Docker EE 是企业版，即收费版。</p>
@@ -200,9 +245,9 @@
         
         <tags>
             
-            <tag> MongoDB </tag>
-            
             <tag> Docker </tag>
+            
+            <tag> MongoDB </tag>
             
         </tags>
         
