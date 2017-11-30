@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://brickyang.github.io/2017/01/14/CentOS-7-%E5%AE%89%E8%A3%85-Shadowsocks-%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
+    
+    <lastmod>2017-11-30T08:24:22.238Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://brickyang.github.io/2017/07/04/Egg-mongo%EF%BC%8C%E5%9F%BA%E4%BA%8E-MongoDB-Native-Driver/</loc>
     
     <lastmod>2017-07-04T08:32:37.000Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>http://brickyang.github.io/2017/03/17/%E5%A6%82%E4%BD%95%E7%94%A8%E6%BA%90%E7%94%9F%E7%9A%84-React%EF%BC%8C-Webpack%EF%BC%8CES6-%E6%9D%A5%E4%BD%BF%E7%94%A8-AantDdesign-%E7%BB%84%E4%BB%B6%E5%BA%93%EF%BC%9F/</loc>
     
     <lastmod>2017-03-17T09:38:23.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://brickyang.github.io/2017/01/14/CentOS-7-%E5%AE%89%E8%A3%85-Shadowsocks-%E5%AE%A2%E6%88%B7%E7%AB%AF/</loc>
-    
-    <lastmod>2017-03-02T10:55:57.000Z</lastmod>
     
   </url>
   
