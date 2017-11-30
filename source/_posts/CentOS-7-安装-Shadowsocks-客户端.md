@@ -112,8 +112,8 @@ vi /usr/local/etc/privoxy/config
 找到以下两句，确保没有注释掉
 
 ```
-listen-address 127.0.0.1:8118 # 8118 是默认端口，不用改，下面会用到
-forward-socks5t / 127.0.0.1:0 # 这里的端口写 shadowsocks 的本地端口
+listen-address 127.0.0.1:8118   # 8118 是默认端口，不用改，下面会用到
+forward-socks5t / 127.0.0.1:0 . # 这里的端口写 shadowsocks 的本地端口（注意最后那个 . 不要漏了）
 ```
 
 ### 启动
