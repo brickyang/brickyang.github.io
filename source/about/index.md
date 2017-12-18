@@ -4,21 +4,20 @@ date: 2017-01-12T22:40:08.000Z
 layout: page
 ---
 
-10年新媒体从业，产品转开发。15岁开始接触编程，却到30岁才开始正式做开发。纯野生程序员。轻微洁癖，规范爱好者。花在改进代码和规范的时间永远是写新功能的 N 倍以至于项目永远延期。
-
-目前正在 Coursera 上补课计算机原理、C/C++、数据结构和算法基础。
+15 岁开始接触编程，却到 30 岁才开始正式做开发。持续学习。轻微洁癖，规范爱好者。花在改进代码和规范的时间永远是写新功能的 N 倍以至于项目永远延期。
 
 ### 技术栈
 
-- ES2015
 - Node.js
 - React.js
-- React Native
 - MongoDB
 - Redis
 - Webpack
 - Babel
 - Docker
+- Python
+- Machine Learning
+- Deep Learning
 
 ### 为什么写博客
 
