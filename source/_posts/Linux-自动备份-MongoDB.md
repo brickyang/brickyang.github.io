@@ -92,8 +92,7 @@ chkconfig crond on    // 设为开机启动
 
 [使用 mongorestore 恢复 MongoDB 备份](https://brickyang.github.io/2017/04/11/%E4%BD%BF%E7%94%A8-mongorestore-%E6%81%A2%E5%A4%8D-MongoDB-%E5%A4%87%E4%BB%BD/)
 
-**参考资料**
+***
 
-[Back Up and Restore with MongoDB Tools](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/)
-
-[Cron - Wikipedia](https://zh.wikipedia.org/zh-hans/Cron)
+- [Back Up and Restore with MongoDB Tools](https://docs.mongodb.com/manual/tutorial/backup-and-restore-tools/)
+- [Cron - Wikipedia](https://zh.wikipedia.org/zh-hans/Cron)

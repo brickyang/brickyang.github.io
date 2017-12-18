@@ -178,10 +178,8 @@ $ jupyter notebook --ip=0.0.0.0
 
 然后就可以在本地浏览器打开 `<IP>:8888` 访问服务器上的 notebook，开始愉快地开发了。不过通常建议先在本地开发，确定程序没问题后，再到服务器上进行训练，毕竟服务器是按时间收费。
 
-**参考资料**
+***
 
-[Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux#InstallingNativePip)
-
-[Keras Documentation#Installation](https://keras.io/#installation)
-
-[Installing Jupyter](http://jupyter.org/install.html)
+- [Installing TensorFlow on Ubuntu](https://www.tensorflow.org/install/install_linux#InstallingNativePip)
+- [Keras Documentation#Installation](https://keras.io/#installation)
+- [Installing Jupyter](http://jupyter.org/install.html)

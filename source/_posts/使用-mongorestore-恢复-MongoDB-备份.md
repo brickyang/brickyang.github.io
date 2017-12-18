@@ -24,6 +24,6 @@ mongorestore -d <DATABASE> -c <COLLECTION> <PATH>
 
 `PATH` 就是要恢复的数据文件夹或文件，用于恢复整个数据库或指定恢复一个列的数据。
 
-**参考资料**
+***
 
-[mongorestore](https://docs.mongodb.com/manual/reference/program/mongorestore/)
+- [mongorestore](https://docs.mongodb.com/manual/reference/program/mongorestore/)

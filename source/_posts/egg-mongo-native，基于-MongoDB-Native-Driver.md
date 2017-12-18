@@ -10,7 +10,7 @@ tags:
 
 **2017/12/18 更新** egg-mongo-native 已升级至 Egg.js 2 并支持集群配置。
 
----
+***
 
 MongoDB 官方为 Node.js 提供了 MongoDB Native Driver。这也是我一直喜欢使用的 MongoDB 库。直接使用官方 API 简单明了，而且也易于学习。
 

@@ -77,6 +77,6 @@ sudo systemctl start docker
 
 如果希望升级 Docker，首先运行 `sudo yum makecache fast`，然后按照以上步骤重新选择新版本安装。
 
-**参考资料**
+***
 
-[Get Docker for CentOS](https://docs.docker.com/engine/installation/linux/centos/#install-docker)
+- [Get Docker for CentOS](https://docs.docker.com/engine/installation/linux/centos/#install-docker)
