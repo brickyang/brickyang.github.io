@@ -1,5 +1,5 @@
 ---
-title: Egg-mongo，基于 MongoDB Native Driver
+title: egg-mongo-native，基于 MongoDB Native Driver
 date: 2017-07-04 16:23:05
 description: 本插件基于 node-mongodb-native，提供了 MongoDB 官方 driver 及 API。插件对一些常用 API 进行了简单封装以简化使用，同时保留了所有原版属性。适合官方党享用。
 tags:
@@ -8,11 +8,15 @@ tags:
   - Egg Plugin
 ---
 
+**2017/12/18 更新** egg-mongo-native 已升级至 Egg.js 2 并支持集群配置。
+
+---
+
 MongoDB 官方为 Node.js 提供了 MongoDB Native Driver。这也是我一直喜欢使用的 MongoDB 库。直接使用官方 API 简单明了，而且也易于学习。
 
 Egg.js 官方提供的 MongoDB 插件基于 Mongoose，所以就自己动手做了这个插件。插件的 API 都是我在实际项目中长期使用的。
 
-**GitHub：**[https://github.com/brickyang/egg-mongo](https://github.com/brickyang/egg-mongo)
+**GitHub：**[https://github.com/brickyang/egg-mongo-native](https://github.com/brickyang/egg-mongo-native)
 
 本插件基于 [node-mongodb-native](https://github.com/mongodb/node-mongodb-native)，提供了 MongoDB 官方 driver 及 API。
 
@@ -48,19 +52,51 @@ $ npm i egg-mongo-native --save
 // config/plugin.js
 exports.mongo = {
   enable: true,
-  package: 'egg-mongo',
+  package: 'egg-mongo-native',
 };
 ```
 
 ## 配置
 
+### 单实例
+
 ```javascript
 // {app_root}/config/config.default.js
 exports.mongo = {
   client: {
-    host: 'localhost',
-    port: 27017,
+    host: 'host',
+    port: 'port',
     name: 'test',
+    user: 'user',
+    password: 'password',
+  },
+};
+```
+
+### 集群 （v2.1.0 以上）
+
+```js
+// mongodb://host1:port1,host2:port2/name?replicaSet=test
+exports.mongo = {
+  client: {
+    host: 'host1, host2',
+    port: 'port1, port2',
+    name: 'name',
+    option: {
+      replicaSet: 'test',
+    },
+  },
+};
+
+// mongodb://host:port1,host:port2/name?replicaSet=test
+exports.mongo = {
+  client: {
+    host: 'host', // or ['host']
+    port: 'port1, port2', // or ['port1', 'port2']
+    name: 'name',
+    option: {
+      replicaSet: 'test',
+    },
   },
 };
 ```
@@ -129,16 +165,6 @@ async function create(doc) {
     const result = await app.mongo.insertOne('name', { doc });
     console.log(result);
   } catch (error) {
-    console.error(error);
-  }
-}
-
-// 使用 Generator
-function* create(doc) {
-  try {
-    const result = yield app.mongo.insertOne('name', { doc });
-    console.log(result);
-  } catch (errpr) {
     console.error(error);
   }
 }
