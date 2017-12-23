@@ -9,10 +9,9 @@ tags:
   - AWS
   - Tensorflow
   - Keras
-  
 ---
 
-Amazon Web Services（AWS）非常适合用来学习深度学习。其最便宜的 GPU 计算实例 p2.xlarge 基本价格仅 0.9 美元/小时，如果使用竞价（Spot）实例则价格还有可能更低。在你决定出手 1080 Ti 之前，不妨先用 AWS 来练习。
+Amazon Web Services（AWS）非常适合用来学习深度学习。其最便宜的 GPU 计算实例 p2.xlarge 基本价格最低仅 0.9 美元/小时，如果使用竞价（Spot）实例则价格还有可能更低。在你决定出手 1080 Ti 之前，不妨先用 AWS 来练习。
 
 在 AWS 上搭建一个深度学习环境非常简单，但对没有经验的新手来说还是存在一些小坑的。本文记录了我搭建环境的过程。我的环境是 Ubuntu 16.04、Python 3.5、Tensorflow 1.4、Keras 2.1、CUDA 8、cuDNN 6 以及 Jupyter Notebook。
 
@@ -44,9 +43,9 @@ $ ssh -i ~/.ssh/<filename>.pem ubuntu@<公有 IP>
 
 ### 收费
 
-p2.xlarge 的基础费用是 0.9 美元/小时，启动即开始计费，停机则停止计费。因此如果你每次使用时间不长，使用完毕记得「停止」即可，费用很低。
+p2.xlarge 的标准费用和地区有关。弗吉尼亚北部最低，0.9 美元/小时，东京是 1.542 美元/小时，启动即开始计费，停机则停止计费。因此如果你每次使用时间不长，使用完毕记得「停止」即可，费用很低。
 
-如果你需要长期使用（比如需要训练一个大模型），也可以考虑使用「竞价请求」，有机会进一步降低价格。关于竞价请求的介绍可以看这里：https://aws.amazon.com/ec2/spot/
+如果你需要长期使用（比如需要训练一个大模型），强烈建议使用「竞价请求」，通常情况下不会超过 0.5 美元/小时。关于竞价请求的介绍可以看这里：https://aws.amazon.com/ec2/spot/
 
 ## 安装显卡驱动
 
@@ -131,13 +130,13 @@ $ sudo find / -name libcudnn*
 默认环境安装了 Python 3.5 但是没有安装 `pip3`，所以我们先安装它：
 
 ```bash
-$ sudo apt-get install python3-pip python3-dev
+$ sudo apt install python3-pip python3-dev
 ```
 
 然后安装 Tensorflow：
 
 ```bash
-$ sudo pip3 install tensorflow-gpu
+$ pip3 install tensorflow-gpu
 ```
 
 ### 验证安装
@@ -156,8 +155,8 @@ $ python3
 安装 Keras 比较简单，直接 `pip3` 安装即可：
 
 ```bash
-$ sudo pip3 install keras
-$ sudo pip3 install jupyter notebook
+$ pip3 install keras
+$ pip3 install jupyter notebook
 ```
 
 ## 安装 Jupyter Notebook
@@ -166,6 +165,12 @@ Jupyter 官方建议使用 Anaconda，这也是我们通常推荐使用环境。
 
 ```bash
 python3 -m pip install jupyter
+```
+
+## 安装常用库（可选）
+
+```bash
+pip3 install numpy pandas scikit-learning pillow h5py openvc-python
 ```
 
 ## 开始项目
