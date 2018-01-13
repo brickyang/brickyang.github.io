@@ -135,7 +135,7 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-值得注意下的是[ `ADD` 命令][]，如果：
+值得注意下的是 [`ADD` 命令][]，如果：
 
 1. `ADD` 文件夹到目标位置，目标路径结尾没有 `/`：`ADD node_modules /app/node_modules`
 2. `ADD` 多个文件到目标位置，目标路径结尾有 `/`：`ADD app/*.js /app/app/`
@@ -151,5 +151,5 @@ CMD ["npm", "start"]
 - [Configuration of your jobs with .gitlab-ci.yml](https://docs.gitlab.com/ce/ci/yaml/README.html)
 - [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
 
-[ `ADD` 命令]: https://docs.docker.com/engine/reference/builder/#add	"Dockerfile reference#ADD"
+[`ADD` 命令]: https://docs.docker.com/engine/reference/builder/#add	"Dockerfile reference#ADD"
 [预设变量]: https://docs.gitlab.com/ce/ci/variables/README.html	"GitLab CI/CD Variables"
