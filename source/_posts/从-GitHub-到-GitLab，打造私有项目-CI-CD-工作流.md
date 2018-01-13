@@ -49,7 +49,7 @@ GitHub 首先对私有仓库收费，新政策 7 美元/月还算便宜，比以
 
 这是一个 TypeScript 的 Node.js 项目的实例。
 
-### .gitlab-ci.yml[^1]
+### [.gitlab-ci.yml][1]
 
 ```yml
 build:
@@ -102,12 +102,12 @@ GitLab 的文档非常简单易懂，这里只说几个值得注意的点：
 
 1. 在 `build` 中产生的文件（安装的依赖和编译文件），需要通过 `artifacts` 传递给后续的 `jobs`，否则后续 `jobs` 的环境中是没有这些文件的。
 2. 所有环境和数据库都在不同的 Docker `container` 中，所以连接数据库不能用 `Host: localhost`，而要用 `Host: redis`、`Host: mysql` 这种。
-3. `$CI_REGISTRY` 这种是 GitLab 的内置变量[^2]，可以直接使用。`$CI_JOB_TOKEN` 需要在设置页面先新建一个 Access Token。
+3. `$CI_REGISTRY` 这种是 GitLab 的[预设变量][2]，可以直接使用。`$CI_JOB_TOKEN` 需要在设置页面先新建一个 Access Token。
 
 
 GitLab 提供了 [CI Lint](https://gitlab.com/ci/lint) 工具检查 `.gitlab-ci.yml` 文件的语法正确性。
 
-### Dockerfile[^3]
+### [Dockerfile][3]
 
 CI 的最后一步是 `build` Docker Image，所以要提供 Dockerfile 文件。
 
@@ -135,7 +135,7 @@ EXPOSE 3000
 CMD ["npm", "start"]
 ```
 
-值得注意下的是 `ADD` 命令[^4]，如果：
+值得注意下的是[ `ADD` 命令][4]，如果：
 
 1. `ADD` 文件夹到目标位置，目标路径结尾没有 `/`：`ADD node_modules /app/node_modules`
 2. `ADD` 多个文件到目标位置，目标路径结尾有 `/`：`ADD app/*.js /app/app/`
@@ -148,7 +148,7 @@ CMD ["npm", "start"]
 
 ---
 
-[^1]: [Configuration of your jobs with .gitlab-ci.yml](https://docs.gitlab.com/ce/ci/yaml/README.html)
-[^2]: [GitLab CI/CD Variables](https://docs.gitlab.com/ce/ci/variables/README.html)
-[^3]: [Dockerfile reference](https://docs.docker.com/engine/reference/builder/)
-[^4]: [Dockerfile reference#ADD](https://docs.docker.com/engine/reference/builder/#add)
+[1]: https://docs.gitlab.com/ce/ci/yaml/README.html	"Configuration of your jobs with .gitlab-ci.yml"
+[2]: https://docs.gitlab.com/ce/ci/variables/README.html	"GitLab CI/CD Variables"
+[3]: https://docs.docker.com/engine/reference/builder/	"Dockerfile reference"
+[4]: https://docs.docker.com/engine/reference/builder/#add	"Dockerfile reference#ADD"
