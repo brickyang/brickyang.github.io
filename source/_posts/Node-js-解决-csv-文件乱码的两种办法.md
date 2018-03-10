@@ -1,7 +1,7 @@
 ---
 title: Node.js 解决 csv 文件乱码的两种办法
 date: 2018-03-10 23:56:57
-describe: 解决 csv 文件在 macOS 和 Windows 下使用 Excel 打开时中文出现乱码的问题。
+description: 解决 csv 文件在 macOS 和 Windows 下使用 Excel 打开时中文出现乱码的问题。
 tags:
   - Node.js
 ---
