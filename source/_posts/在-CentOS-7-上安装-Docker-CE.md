@@ -3,7 +3,7 @@ title: 在 CentOS 7 上安装 Docker
 date: 2017-04-12 15:48:19
 description: 记录在 CentOS 7 服务器上安装 Docker CE 的过程。
 tags:
-  - ContOS
+  - CentOS
   - Docker
 ---
 
