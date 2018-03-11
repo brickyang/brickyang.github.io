@@ -4,9 +4,6 @@ date: 2017-12-18 21:31:35
 description: 利用 AWS 快速搭建完整的深度学习环境，以极低成本享受 GPU 计算的快感。本文使用 Ubuntu 16.04、Python 3.5、Tensorflow 1.4、Keras 2.1、CUDA 8，cuDNN 6 环境。
 tags:
   - DeepLearning
-  - Ubuntu
-  - Python
-  - AWS
   - Tensorflow
   - Keras
 ---

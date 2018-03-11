@@ -5,7 +5,6 @@ description: 本插件基于 node-mongodb-native，提供了 MongoDB 官方 driv
 tags:
   - MongoDB
   - Egg.js
-  - Egg Plugin
 ---
 
 **2017/12/18 更新** egg-mongo-native 已升级至 Egg.js 2 并支持集群配置。
