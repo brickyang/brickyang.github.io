@@ -9,7 +9,9 @@ description: 利用 Canvas 将 HTML 转成图片，并具有自动截图、圆�
 
 最近公司微信公众号想使用 Apple 式的圆角阴影卡片做文章推荐。这种效果用 Adobe XD 可以轻松做出来，但是没法要求所有编辑都去学习新软件，所以就打算用前端实现一个小工具。效果如下：
 
-![screenshot](https://github.com/brickyang/reading-card-generator/blob/master/screenshot.jpg?raw=true)
+**更新：**已增加 Electron，可打包成 dmg 或 exe 文件运行。详见 [GitHub](https://github.com/brickyang/reading-card-generator)。
+
+![screenshot](https://github.com/brickyang/reading-card-generator/blob/master/screenshot.png?raw=true)
 
 功能很简单，选择一张图片，输入标题文字，下载即可得到一张 PNG 格式透明背景的圆角阴影卡片图。核心的步骤有这几个：
 
