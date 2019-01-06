@@ -75,12 +75,12 @@ fetchSceneTagsAsync(imagePath, callback) {
         .catch(error => callback([]));
 }
 
-function throattle(paths, callback) {
+function throttle(paths, callback) {
     if(paths.length === 0) return;
     
     const sub = paths.splice(0, 10);
     sub.forEach(path => fetchSceneTagsAsync(path, callback));
-	setTimeout(() => throattle(paths, callback), 1000)
+	setTimeout(() => throttle(paths, callback), 1000)
 }
 
 function writeSceneAsync(paths) {
@@ -89,7 +89,7 @@ function writeSceneAsync(paths) {
         writeToFile(tags);
     }
     
-    throattle(paths, callback)
+    throttle(paths, callback)
 }
 
 function start() {
