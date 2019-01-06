@@ -1,0 +1,83 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>利用 AWS 搭建 Tensoflow + Keras 深度学习环境 | 全栈渐进之路</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">利用 AWS 搭建 Tensoflow + Keras 深度学习环境</h1><a id="logo" href="/.">全栈渐进之路</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">利用 AWS 搭建 Tensoflow + Keras 深度学习环境</h1><div class="post-meta">Dec 18, 2017</div><div class="post-content"><p>Amazon Web Services（AWS）非常适合用来学习深度学习。其最便宜的 GPU 计算实例 p2.xlarge 基本价格最低仅 0.9 美元/小时，如果使用竞价（Spot）实例则价格还有可能更低。在你决定出手 1080 Ti 之前，不妨先用 AWS 来练习。</p>
+<p>在 AWS 上搭建一个深度学习环境非常简单，但对没有经验的新手来说还是存在一些小坑的。本文记录了我搭建环境的过程。我的环境是 Ubuntu 16.04、Python 3.5、Tensorflow 1.4、Keras 2.1、CUDA 8、cuDNN 6 以及 Jupyter Notebook。</p>
+<h2 id="启动-AWS-实例"><a href="#启动-AWS-实例" class="headerlink" title="启动 AWS 实例"></a>启动 AWS 实例</h2><blockquote>
+<p>AWS 地址：<a href="https://aws.amazon.com" target="_blank" rel="noopener">https://aws.amazon.com</a></p>
+</blockquote>
+<p>AWS 提供了大量的产品，我们需要的是 Amazon EC2，即「虚拟服务器」。在开始搭建环境前需要先启动一个「实例」。可以简单地将「实例」理解为服务器。启动一个实例即为「购买」一台服务器。</p>
+<p>AWS 后台可以使用美亚账号登录，如果没有就注册一个吧。登录后台后，进入 EC2 服务控制面板。此时先注意一下页面右上角，在你的 ID 右边应该显示当前服务的区域，建议选择亚太的「东京」区域。我在北京联通光纤宽带的环境下实测，东京线路的速度很不错。</p>
+<blockquote>
+<p>AWS 提供了多个区域供选择，包括美国、亚太、欧洲等。不同地区的实例和 AMI（映像）互不相通，大陆用户建议首选「亚太区域（东京）」。</p>
+</blockquote>
+<p>选好地区后即可「启动实例」。首先需要选择 AMI。因为我们要自己搭建环境，所以这里选择「快速启动」中的「Ubuntu Server 16.04 LTS (HVM), SSD Volume Type」。</p>
+<blockquote>
+<p>你也可以在「社区 AMI」中搜索「ami-ef0a8489」，直接使用我已经装好环境的 AMI，则本文到此为止。</p>
+</blockquote>
+<p>创建实例过程中注意三点：</p>
+<ol>
+<li>选择「p2.xlarge」实例。p2.xlarge 拥有一块 Nvidia Tesla K80 显卡，应付一般的 DL 的学习，包括参加 Kaggle 的竞赛都够了；</li>
+<li>AWS 会要求你创建一个 SSH Key，起个简单的名字即可。将下载的 <code>.pem</code> 文件放在 <code>~/.ssh</code> 目录下，这是你的登录凭证；</li>
+<li>注意「安全组」。默认的安全组是禁止一切访问的，将「入站规则」的「来源」设为「任何位置」，否则可能无法登录（如果你知道自己在做什么，则请随意设置）。</li>
+</ol>
+<p>等待实例启动后，使用 SSH 登录服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -i ~/.ssh/&lt;filename&gt;.pem ubuntu@&lt;公有 IP&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="收费"><a href="#收费" class="headerlink" title="收费"></a>收费</h3><p>p2.xlarge 的标准费用和地区有关。弗吉尼亚北部最低，0.9 美元/小时，东京是 1.542 美元/小时，启动即开始计费，停机则停止计费。因此如果你每次使用时间不长，使用完毕记得「停止」即可，费用很低。</p>
+<p>如果你需要长期使用（比如需要训练一个大模型），强烈建议使用「竞价请求」，通常情况下不会超过 0.5 美元/小时。关于竞价请求的介绍可以看这里：<a href="https://aws.amazon.com/ec2/spot/" target="_blank" rel="noopener">https://aws.amazon.com/ec2/spot/</a></p>
+<h2 id="安装显卡驱动"><a href="#安装显卡驱动" class="headerlink" title="安装显卡驱动"></a>安装显卡驱动</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>使用基础 AMI 启动的实例安装了 Ubuntu 16.4 系统和 Python 3.5。第一步需要安装显卡驱动。</p>
+<p>下载地址：<a href="http://www.nvidia.com/download/driverResults.aspx/122825/en-us" target="_blank" rel="noopener">http://www.nvidia.com/download/driverResults.aspx/122825/en-us</a></p>
+<p>下载好驱动后将文件上传到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp -i ~/.ssh/&lt;filename&gt;.pem ~/downloads/&lt;driver&gt;.deb ubuntu@&lt;IP&gt;:~</span><br></pre></td></tr></table></figure>
+<p>这个命令将 <code>&lt;driver&gt;.deb</code> 文件上传到服务器的 <code>~</code> 目录（在上一步登录服务器后，你应该已经在这个目录中了）。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./&lt;driver&gt;.deb</span><br></pre></td></tr></table></figure>
+<p>等待安装完毕即可。</p>
+<h3 id="验证安装"><a href="#验证安装" class="headerlink" title="验证安装"></a>验证安装</h3><p>安装完成后，运行 <code>nvidia-smi</code> 命令，看到显卡信息则说明安装成功。</p>
+<h2 id="安装-CUDA-8"><a href="#安装-CUDA-8" class="headerlink" title="安装 CUDA 8"></a>安装 CUDA 8</h2><p>目前最新的 CUDA 是 9.0，但 Tensorflow 仍然使用 CUDA 8，所以<strong>一定要安装 CUDA 8</strong>，否则使用 Tensorflow 时会报错。</p>
+<h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><p>下载地址：<a href="https://developer.nvidia.com/cuda-80-ga2-download-archive" target="_blank" rel="noopener">https://developer.nvidia.com/cuda-80-ga2-download-archive</a></p>
+<p>在这个页面，依次选择「Linux」，「x86_64」，「Ubuntu」，「16.04」，「deb (network)」。将下载得到的文件上传到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ scp -i ~/.ssh/&lt;filename&gt;.pem ~/downloads/cuda-repo-ubuntu1604_8.0.61-1_amd64.deb.deb ubuntu@&lt;IP&gt;:~</span><br></pre></td></tr></table></figure>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./cuda-repo-ubuntu1604_8.0.61-1_amd64.deb.deb</span><br></pre></td></tr></table></figure>
+<h3 id="验证安装-1"><a href="#验证安装-1" class="headerlink" title="验证安装"></a>验证安装</h3><p>安装完成后应该会看到 <code>/usr/local/cuda-8.0</code> 目录。</p>
+<h2 id="安装-cuDNN"><a href="#安装-cuDNN" class="headerlink" title="安装 cuDNN"></a>安装 cuDNN</h2><p>cuDNN 也有一个小坑：其最新版本是 7，但<strong>一定要安装 cuDNN 6</strong>，否则会报错。</p>
+<h3 id="下载-2"><a href="#下载-2" class="headerlink" title="下载"></a>下载</h3><p>下载 cuDNN 需要注册 Nvidia Developer 账号并登录。在下载页（<a href="https://developer.nvidia.com/rdp/cudnn-download）勾选「I" target="_blank" rel="noopener">https://developer.nvidia.com/rdp/cudnn-download）勾选「I</a> Agree……」即可看到下载列表，谨记选择「Download cuDNN v6.0 (April 27, 2017), for CUDA 8.0」，有三个文件：</p>
+<ol>
+<li><code>cuDNN v6.0 Runtime Library for Ubuntu16.04 (Deb)</code></li>
+<li><code>cuDNN v6.0 Developer Library for Ubuntu16.04 (Deb)</code></li>
+<li><code>cuDNN v6.0 Code Samples and User Guide for Ubuntu16.04 (Deb)</code></li>
+</ol>
+<p>依次下载并上传即可。</p>
+<h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h3><p>使用同样的命令依次安装三个文件。</p>
+<h3 id="验证安装-2"><a href="#验证安装-2" class="headerlink" title="验证安装"></a>验证安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo find / -name libcudnn*</span><br></pre></td></tr></table></figure>
+<p>可以看到一系列 <code>libcudnn6</code> 的相关文件。</p>
+<h2 id="安装-Tensorflow"><a href="#安装-Tensorflow" class="headerlink" title="安装 Tensorflow"></a>安装 Tensorflow</h2><p>默认环境安装了 Python 3.5 但是没有安装 <code>pip3</code>，所以我们先安装它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt install python3-pip python3-dev</span><br></pre></td></tr></table></figure>
+<p>然后安装 Tensorflow：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install tensorflow-gpu</span><br></pre></td></tr></table></figure>
+<h3 id="验证安装-3"><a href="#验证安装-3" class="headerlink" title="验证安装"></a>验证安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ python3</span><br><span class="line">&gt;&gt;&gt; import tensorflow</span><br></pre></td></tr></table></figure>
+<p>通常这里如果没有报错，就说明 Tensorflow 已经正确安装了。</p>
+<blockquote>
+<p>参考资料：<a href="https://www.tensorflow.org/install/install_linux#InstallingNativePip" target="_blank" rel="noopener">Installing TensorFlow on Ubuntu</a></p>
+</blockquote>
+<h2 id="安装-Keras"><a href="#安装-Keras" class="headerlink" title="安装 Keras"></a>安装 Keras</h2><p>安装 Keras 比较简单，直接 <code>pip3</code> 安装即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip3 install keras</span><br><span class="line">$ pip3 install jupyter notebook</span><br></pre></td></tr></table></figure>
+<h2 id="安装-Jupyter-Notebook"><a href="#安装-Jupyter-Notebook" class="headerlink" title="安装 Jupyter Notebook"></a>安装 Jupyter Notebook</h2><p>Jupyter 官方建议使用 Anaconda，这也是我们通常推荐使用环境。不过因为我们使用 AWS 通常只是针对特定的项目，而且是临时性使用，可以把整个实例看作一个隔离的环境，所以就不使用 Anaconda 而直接安装了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install jupyter</span><br></pre></td></tr></table></figure>
+<h2 id="安装常用库（可选）"><a href="#安装常用库（可选）" class="headerlink" title="安装常用库（可选）"></a>安装常用库（可选）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install numpy pandas scikit-learning pillow h5py openvc-python</span><br></pre></td></tr></table></figure>
+<h2 id="开始项目"><a href="#开始项目" class="headerlink" title="开始项目"></a>开始项目</h2><p>现在我们已经安装好了基本环境，你可以继续根据需要安装其他包，例如 <code>numpy</code>、<code>pandas</code> 等。要开始项目，只需要启动 Jupyter Notebook 即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ jupyter notebook --ip=0.0.0.0</span><br></pre></td></tr></table></figure>
+<p>然后就可以在本地浏览器打开 <code>&lt;IP&gt;:8888</code> 访问服务器上的 notebook，开始愉快地开发了。不过通常建议先在本地开发，确定程序没问题后，再到服务器上进行训练，毕竟服务器是按时间收费。</p>
+<hr>
+<ul>
+<li><a href="https://www.tensorflow.org/install/install_linux#InstallingNativePip" target="_blank" rel="noopener">Installing TensorFlow on Ubuntu</a></li>
+<li><a href="https://keras.io/#installation" target="_blank" rel="noopener">Keras Documentation#Installation</a></li>
+<li><a href="http://jupyter.org/install.html" target="_blank" rel="noopener">Installing Jupyter</a></li>
+</ul>
+</div><div class="tags"><a href="/tags/DeepLearning/">DeepLearning</a><a href="/tags/Tensorflow/">Tensorflow</a><a href="/tags/Keras/">Keras</a></div><div class="post-nav"><a class="pre" href="/2017/12/21/如何在-Egg-js-中使用-TypeScript/">如何在 Egg.js 中使用 TypeScript</a><a class="next" href="/2017/07/04/egg-mongo-native，基于-MongoDB-Native-Driver/">egg-mongo-native，基于 MongoDB Native Driver</a></div><div id="container"></div><link rel="stylesheet" href="/css/default.css?v=0.0.0"><script src="/js/gitment.browser.js?v=0.0.0"></script><script>var gitment = new Gitment({
+  id: window.location.pathname.substring(1,window.location.pathname.length),
+  owner: 'brickyang',
+  repo: 'brickyang.github.io',
+  oauth: {
+    client_id: '5138003df5bdc84387cc',
+    client_secret: '44453214f761ec1011af0408997264bab2cd1649',
+  },
+})
+gitment.render('container')
+</script></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="http://brickyang.github.io"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Tensorflow/" style="font-size: 15px;">Tensorflow</a> <a href="/tags/MongoDB/" style="font-size: 15px;">MongoDB</a> <a href="/tags/Shadowsocks/" style="font-size: 15px;">Shadowsocks</a> <a href="/tags/Docker/" style="font-size: 15px;">Docker</a> <a href="/tags/Linux/" style="font-size: 15px;">Linux</a> <a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a> <a href="/tags/GitLab/" style="font-size: 15px;">GitLab</a> <a href="/tags/Lisp-Scheme/" style="font-size: 15px;">Lisp/Scheme</a> <a href="/tags/Program/" style="font-size: 15px;">Program</a> <a href="/tags/Egg-js/" style="font-size: 15px;">Egg.js</a> <a href="/tags/DeepLearning/" style="font-size: 15px;">DeepLearning</a> <a href="/tags/CentOS/" style="font-size: 15px;">CentOS</a> <a href="/tags/Keras/" style="font-size: 15px;">Keras</a> <a href="/tags/TypeScript/" style="font-size: 15px;">TypeScript</a> <a href="/tags/SSH/" style="font-size: 15px;">SSH</a> <a href="/tags/WeChat/" style="font-size: 15px;">WeChat</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/Canvas/" style="font-size: 15px;">Canvas</a> <a href="/tags/React/" style="font-size: 15px;">React</a> <a href="/tags/Ant-Design/" style="font-size: 15px;">Ant Design</a> <a href="/tags/Webpack/" style="font-size: 15px;">Webpack</a> <a href="/tags/Babel/" style="font-size: 15px;">Babel</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/01/06/Node-js-利用异步提升任务处理速度/">Node.js 利用异步提升任务处理速度</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/08/27/纯前端-Canvas-实现-HTML-转图片，自动生成微信阅读卡片/">纯前端 Canvas 实现 HTML 转图片，自动生成微信阅读卡片</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/06/16/利用-SSH-端口转发进行微信开发本地调试/">利用 SSH 端口转发进行微信开发本地调试</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/11/《计算机程序的构造和解释》（SICP）练习题解集/">《计算机程序的构造和解释》（SICP）练习题解集</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/03/10/Node-js-解决-csv-文件乱码的两种办法/">Node.js 解决 csv 文件乱码的两种办法</a></li><li class="post-list-item"><a class="post-list-link" href="/2018/01/04/从-GitHub-到-GitLab，打造私有项目-CI-CD-工作流/">从 GitHub 到 GitLab，打造私有项目 CI/CD 工作流</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/21/如何在-Egg-js-中使用-TypeScript/">如何在 Egg.js 中使用 TypeScript</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/12/18/利用-AWS-搭建-Tensoflow-Keras-深度学习环境/">利用 AWS 搭建 Tensoflow + Keras 深度学习环境</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/07/04/egg-mongo-native，基于-MongoDB-Native-Driver/">egg-mongo-native，基于 MongoDB Native Driver</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/04/12/在-CentOS-7-上安装-Docker-CE/">在 CentOS 7 上安装 Docker</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">全栈渐进之路.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.2/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
