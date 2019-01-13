@@ -7,6 +7,17 @@ tags:
   - TypeScript
 ---
 
+**2019-01-13：**本文发表时，Egg.js 还没有官方的 TypeScript 实践指南。目前 Egg 的 TypeScript 生态已经有了很大的改进，包括：
+
+- egg-ts-helper 自动生成声明文件
+- 内置 ts-node 实现开发阶段加载 `.ts` 文件并内存编译（不输出 `.js` 文件）
+- `egg-init` 支持 `--type=ts`
+- 改进错误堆栈
+
+这些改进令使用 TypeScript 开发 Egg 应用更加方便。本文中提到的一些操作细节不再必要，不过这些概念仍然有效，对 TypeScript 新人也仍有价值。GitHub 上的 [egg-ts-boilerplate](https://github.com/brickyang/egg-ts-boilerplate) 也已经更新。
+
+
+
 Egg.js 本身不是用 TypeScript 写的，但是它提供了 `index.d.ts` 文件，因此我们可以很方便地在自己的 Egg 应用中使用 TypeScript。
 
 在 Egg.js 中使用 TypeScript 的模板：[egg-ts-boilerplate](https://github.com/brickyang/egg-ts-boilerplate)。
