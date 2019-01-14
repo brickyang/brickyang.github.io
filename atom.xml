@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://brickyang.github.io/"/>
-  <updated>2019-01-06T12:41:58.860Z</updated>
+  <updated>2019-01-14T14:44:24.899Z</updated>
   <id>http://brickyang.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>国内下载安装 Puppeteer 的方法</title>
+    <link href="http://brickyang.github.io/2019/01/14/%E5%9B%BD%E5%86%85%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-Puppeteer-%E7%9A%84%E6%96%B9%E6%B3%95/"/>
+    <id>http://brickyang.github.io/2019/01/14/国内下载安装-Puppeteer-的方法/</id>
+    <published>2019-01-14T14:17:08.000Z</published>
+    <updated>2019-01-14T14:44:24.899Z</updated>
+    
+    <content type="html"><![CDATA[<p>执行 <code>npm install puppeteer</code> 时，有可能会报错，也有可能不会。只要没看到类似：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Downloading Chromium r609904 - 82.7 Mb [===                 ] 16% 990.3s</span><br></pre></td></tr></table></figure><p>这样的输出，就是没有下载 Chromium。启动 app 后就会报错：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nodejs.Error: Chromium revision is not downloaded. Run <span class="string">"npm install"</span> or <span class="string">"yarn install"</span></span><br></pre></td></tr></table></figure><p>此时再执行这些命令通常没有用，因为能下载第一次安装时就会下载了。</p><h1 id="方法一（推荐）"><a href="#方法一（推荐）" class="headerlink" title="方法一（推荐）"></a>方法一（推荐）</h1><p>在终端执行：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PUPPETEER_DOWNLOAD_HOST=https://storage.googleapis.com.cnpmjs.org npm install puppeteer</span><br></pre></td></tr></table></figure><p>改用 cnpm 的镜像地址下载。此方法基本无副作用。</p><h1 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h1><p>改用 <code>puppeteer-cn</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save puppeteer-cn</span><br></pre></td></tr></table></figure><p>需要本地 Chrome 版本大于 59。详见：<a href="https://npm.taobao.org/package/puppeteer-cn" target="_blank" rel="noopener">puppeteer-cn</a></p><h1 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h1><p>用 cnpm 安装：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cnpm install puppeteer</span><br></pre></td></tr></table></figure><p>cnpm 是淘宝的镜像源，出于一些原因，我个人已经不再使用。关于 cnpm：<a href="https://github.com/cnpm/cnpm" target="_blank" rel="noopener">cnpm</a></p><h1 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h1><p>最复杂的手动安装，建议没事别折腾。参考：<a href="https://marxjiao.com/2018/08/26/puppeteer-install/" target="_blank" rel="noopener">手动下载 Chrome，解决 puppeteer 无法使用问题</a></p>]]></content>
+    
+    <summary type="html">
+    
+      因为某些原因国内难以正常安装 Puppeteer。
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>Node.js 利用异步提升任务处理速度</title>
@@ -228,9 +246,9 @@
     </summary>
     
     
-      <category term="CentOS" scheme="http://brickyang.github.io/tags/CentOS/"/>
-    
       <category term="Docker" scheme="http://brickyang.github.io/tags/Docker/"/>
+    
+      <category term="CentOS" scheme="http://brickyang.github.io/tags/CentOS/"/>
     
   </entry>
   
@@ -318,9 +336,9 @@
     </summary>
     
     
-      <category term="MongoDB" scheme="http://brickyang.github.io/tags/MongoDB/"/>
-    
       <category term="Docker" scheme="http://brickyang.github.io/tags/Docker/"/>
+    
+      <category term="MongoDB" scheme="http://brickyang.github.io/tags/MongoDB/"/>
     
   </entry>
   
