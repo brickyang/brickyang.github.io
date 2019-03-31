@@ -109,36 +109,36 @@
 </tbody>
 </table>
 <h2 id="3-Methodology"><a href="#3-Methodology" class="headerlink" title="3. Methodology"></a>3. Methodology</h2><h3 id="3-1-Explore-Dataset"><a href="#3-1-Explore-Dataset" class="headerlink" title="3.1. Explore Dataset"></a>3.1. Explore Dataset</h3><p>Using <code>folium</code> library to create map with markers to establish a global view of the dataset, and examine the accuracy of coordinates.</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/map_with_markers.png" alt="map_with_markers"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/map_with_markers.png" alt="map_with_markers"></p>
 <p>It looks like every marker is in the right place. Markers cover almost whole Hong Kong Island and Kowloon. We can identify some famous place like Tsim Sha Tsui, Central District, and Causeway Bay.</p>
 <h3 id="3-2-Examin-Foursquare-Location-Date"><a href="#3-2-Examin-Foursquare-Location-Date" class="headerlink" title="3.2. Examin Foursquare Location Date"></a>3.2. Examin Foursquare Location Date</h3><p>Using Foursquare’s <code>/venues/explore</code> API to get recommended vanues for a specific location. To simplify the results set the <code>limit</code> property is 100 and <code>radius</code> is 1000.</p>
 <p>This request should returns a JSON data includes up to 100 venues for a coordinate.</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/json_screenshot.png" alt="json_screenshot"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/json_screenshot.png" alt="json_screenshot"></p>
 <p>The result seems great. Next we can get venues for every neighborhoods.</p>
 <h3 id="3-3-Pre-processing-Data"><a href="#3-3-Pre-processing-Data" class="headerlink" title="3.3. Pre-processing Data"></a>3.3. Pre-processing Data</h3><p>Firstly, use the venues data from Foursquare to create a <code>DataFrame</code>:</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/vanues_dataframe.png" alt="vanues_dataframe"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/vanues_dataframe.png" alt="vanues_dataframe"></p>
 <p>Then create one-hot encoding to the vanues categories, get mean of each category for every neighborhood:</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/onehot_neighborhood.png" alt="onehot_neighborhood"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/onehot_neighborhood.png" alt="onehot_neighborhood"></p>
 <p>Finally calculate the frequency of categories for each neighborhood, we get the top10 most common venues for every neighborhood:</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/top10_venues.png" alt="top10_venues"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/top10_venues.png" alt="top10_venues"></p>
 <p>Plus, add a new column named ‘Station’ which represents if there is a bus/metro station nearby a neighborhood:</p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/final_dataframe.png" alt="final_dataframe"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/final_dataframe.png" alt="final_dataframe"></p>
 <p>Now the pre-processing step is finished. We can run clustering on it.</p>
 <h3 id="3-4-Clustering"><a href="#3-4-Clustering" class="headerlink" title="3.4. Clustering"></a>3.4. Clustering</h3><p>For this project, k-means is an appropriate clustering algorithm. Because we have a unlabelled dataset, so this is an unsupervisied learning project. K-means clustering aims to partition <code>n</code> observations into <code>k</code> clusters in which each observation belongs to the cluster with the nearest mean.By clustering the neighborhoods, we can find out the pattern in them, identify the identical neighborhoods and see which is our target.</p>
 <p>One difficulty of k-means is to determine the hyperparameter <code>k</code>. In this project I will choose <code>k=5</code>, means clustering the neighborhoods into 5 clusters. <code>k=5</code> is an experience hyperparameter.</p>
 <h2 id="4-Results"><a href="#4-Results" class="headerlink" title="4. Results"></a>4. Results</h2><h3 id="4-1-Visualize-Clusters"><a href="#4-1-Visualize-Clusters" class="headerlink" title="4.1. Visualize Clusters"></a>4.1. Visualize Clusters</h3><p>Again, I use <code>folium</code> library to create a map with clustered markers:</p>
-<p><img src="file:///Users/brick/python/Coursera_Capstone/screenshot/clustering_map.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/clustering_map.png" alt="img"></p>
 <p>Obviously there are two main clusters. Almost all neighborhoods in these clusters located in the urban area which makes sense. The other three clusters seems located in the mountains. They are definitely not our target.</p>
 <h3 id="4-2-Print-Clusters"><a href="#4-2-Print-Clusters" class="headerlink" title="4.2. Print Clusters"></a>4.2. Print Clusters</h3><p><strong>Cluster 1</strong></p>
-<p><img src="/Users/brick/python/Coursera_Capstone/screenshot/cluster_1.png" alt="cluster_1"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/cluster_1.png" alt="cluster_1"></p>
 <p><strong>Cluster 2</strong></p>
-<p><img src="file:///Users/brick/python/Coursera_Capstone/screenshot/cluster_2.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/cluster_2.png" alt="img"></p>
 <p><strong>Cluster 3</strong></p>
-<p><img src="file:///Users/brick/python/Coursera_Capstone/screenshot/cluster_3.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/cluster_3.png" alt="img"></p>
 <p><strong>Cluster 4</strong></p>
-<p><img src="file:///Users/brick/python/Coursera_Capstone/screenshot/cluster_4.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/cluster_4.png" alt="img"></p>
 <p><strong>Cluster 5</strong></p>
-<p><img src="file:///Users/brick/python/Coursera_Capstone/screenshot/cluster_5.png" alt="img"></p>
+<p><img src="https://raw.githubusercontent.com/brickyang/Coursera_Capstone/master/screenshot/cluster_5.png" alt="img"></p>
 <h3 id="4-3-Answer-the-Question"><a href="#4-3-Answer-the-Question" class="headerlink" title="4.3. Answer the Question"></a>4.3. Answer the Question</h3><p>By examining the clusters, I identify the cluster 1 as residential area and cluster 2 represents commercial area.</p>
 <p> The most common venues in cluster 1 are mostly Chinese restaurant (Cha Chaan Teng and Cantonese/Hong Kong restaurant are another types of Chinese restaurant), whereas the most common venues in cluster 2 are various, including foreign restaurants, fast food restaurants, gyms, clubs, and hotels.</p>
 <p>Our question is “Where is the appropriate place to open a new restaurant”. The answer of this question depends on what type of the restaurant is. If it’s a local restaurant, neighborhoods in cluster 1 would be good places. But for upscale restaurant, neighborhoods in cluster 2 would be better choices.</p>
