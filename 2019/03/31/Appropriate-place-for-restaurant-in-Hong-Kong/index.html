@@ -7,7 +7,7 @@
 <li>Venues data from Foursquare[2]</li>
 </ol>
 <p>The coordinates data is from <a href="https://www.maps.ie/coordinates.html" target="_blank" rel="noopener">https://www.maps.ie/coordinates.html</a>.</p>
-<p><em><strong>Note:</strong> Some data may constains Chinese characters, i.e. some places’ name, though I’ve tried my best to avoid it. Please aware that it doesn’t affact the analysis and report at all.</em></p>
+<p><em><strong>Note:</strong> Some data may contains Chinese characters, i.e. some places’ name, though I’ve tried my best to avoid it. Please aware that it doesn’t affect the analysis and report at all.</em></p>
 <h3 id="2-2-Data-Cleaning"><a href="#2-2-Data-Cleaning" class="headerlink" title="2.2. Data Cleaning"></a>2.2. Data Cleaning</h3><p>Hong Kong consists of Hong Kong Island, the Kowloon Peninsula, the New Territories, Lantau Island, and over 200 other islands. This project will focus on Hong Kong Island and Kowloon.</p>
 <p>First of all, I need to collect the districts and neighborhoods data from wikipedia page, and find the coordinates for every neighborhood. I did this manually and create a file named <code>neighborhoods_hong_kong.csv</code>.</p>
 <p>The formatted data looks like this:</p>
@@ -53,7 +53,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="2-3-Feature-Selection"><a href="#2-3-Feature-Selection" class="headerlink" title="2.3 Feature Selection"></a>2.3 Feature Selection</h3><p>In this project, I will get data of recommended venues inside 1000 meters radius of every neighborhood, calculate the top10 most common vanues by its category as features. Plus, the 11th feature is if there is a bus/metro station nearby.</p>
+<h3 id="2-3-Feature-Selection"><a href="#2-3-Feature-Selection" class="headerlink" title="2.3 Feature Selection"></a>2.3 Feature Selection</h3><p>In this project, I will get data of recommended venues inside 1000 meters radius of every neighborhood, calculate the top10 most common venues by its category as features. Plus, the 11th feature is if there is a bus/metro station nearby.</p>
 <table>
 <thead>
 <tr>
