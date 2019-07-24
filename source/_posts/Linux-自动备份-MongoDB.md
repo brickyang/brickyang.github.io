@@ -39,15 +39,18 @@ vi ~/crontab/mongod_bak.sh
 
 ```
 #!/bin/sh
-DUMP=mongodump
-OUT_DIR=/data/backup/mongod/tmp   // 备份文件临时目录
-TAR_DIR=/data/backup/mongod       // 备份文件正式目录
-DATE=`date +%Y_%m_%d_%H_%M_%S`    // 备份文件将以备份时间保存
+
 DB_USER=<USER>                    // 数据库操作员
 DB_PASS=<PASSWORD>                // 数据库操作员密码
+TAR_DIR=<TAR_DIR>       					// 备份文件正式目录，例如：/data/backup/mongod
+OUT_DIR=<OUT_DIR>   							// 备份文件临时目录，例如：/data/backup/mongod/tmp
+
+DUMP=mongodump
+DATE=`date +%Y_%m_%d_%H_%M_%S`    // 备份文件将以备份时间保存
 DAYS=14                           // 保留最新14天的备份
 TAR_BAK="mongod_bak_$DATE.tar.gz" // 备份文件命名格式
-cd $OUT_DIR                       // 创建文件夹
+
+mkdir -p $OUT_DIR && cd $OUT_DIR  // 务必确保 $OUT_DIR 路径正确，否则可能引起致命错误
 rm -rf $OUT_DIR/*                 // 清空临时目录
 mkdir -p $OUT_DIR/$DATE           // 创建本次备份文件夹
 $DUMP -u $DB_USER -p $DB_PASS -o $OUT_DIR/$DATE  // 执行备份命令
@@ -70,10 +73,10 @@ chmod +x ~/crontab/mongod_bak.sh
 备份脚本写好之后，就需要让它自动运行。直接使用 Linux 的 `crontab` 命令即可：
 
 ```
-vi /etc/crontab
+crontab -e
 ```
 
-在底部添加：
+在打开的文件中写入：
 
 ```
 0 2 * * * root ~/crontab/mongod_bak.sh
