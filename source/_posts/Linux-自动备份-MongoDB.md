@@ -42,8 +42,8 @@ vi ~/crontab/mongod_bak.sh
 
 DB_USER=<USER>                    // 数据库操作员
 DB_PASS=<PASSWORD>                // 数据库操作员密码
-TAR_DIR=<TAR_DIR>       					// 备份文件正式目录，例如：/data/backup/mongod
-OUT_DIR=<OUT_DIR>   							// 备份文件临时目录，例如：/data/backup/mongod/tmp
+TAR_DIR=<TAR_DIR>                 // 备份文件正式目录，例如：/data/backup/mongod
+OUT_DIR=<OUT_DIR>                 // 备份文件临时目录，例如：/data/backup/mongod/tmp
 
 DUMP=mongodump
 DATE=`date +%Y_%m_%d_%H_%M_%S`    // 备份文件将以备份时间保存
